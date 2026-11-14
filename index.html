@@ -1,0 +1,1110 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meu Caderno DEV</title>
+
+<style>
+:root {
+  --bg: #0b0e14;
+  --panel: #111722;
+  --panel2: #171f2d;
+  --border: #263244;
+  --text: #e8edf5;
+  --muted: #8995a8;
+  --accent: #4f8cff;
+  --green: #35c98a;
+  --red: #f06464;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+}
+
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* MENU LATERAL */
+
+.sidebar {
+  width: 225px;
+  background: #0e131d;
+  border-right: 1px solid var(--border);
+  padding: 22px 15px;
+  flex-shrink: 0;
+}
+
+.logo {
+  font-size: 21px;
+  font-weight: bold;
+  margin: 5px 8px 35px;
+}
+
+.logo span {
+  color: var(--accent);
+}
+
+.menu-title {
+  color: var(--muted);
+  font-size: 11px;
+  margin: 22px 9px 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.nav-btn {
+  width: 100%;
+  background: transparent;
+  color: #aab5c7;
+  padding: 12px;
+  border-radius: 8px;
+  text-align: left;
+  margin-bottom: 5px;
+  transition: 0.2s;
+}
+
+.nav-btn:hover,
+.nav-btn.active {
+  background: #1b2b45;
+  color: white;
+}
+
+.nav-btn.active {
+  border-left: 3px solid var(--accent);
+}
+
+/* ÁREA PRINCIPAL */
+
+.main {
+  flex: 1;
+  min-width: 0;
+  padding: 28px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.topbar h1 {
+  font-size: 25px;
+}
+
+.topbar p {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+.primary-btn {
+  background: var(--accent);
+  color: white;
+  padding: 11px 16px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.primary-btn:hover {
+  background: #3476e8;
+}
+
+.secondary-btn {
+  background: var(--panel2);
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.danger-btn {
+  background: #402027;
+  color: #ff9999;
+  padding: 10px 14px;
+  border-radius: 8px;
+}
+
+/* CARTÕES */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-bottom: 28px;
+}
+
+.stat-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.stat-card p {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.stat-card h2 {
+  font-size: 27px;
+  margin-top: 12px;
+}
+
+/* PESQUISA */
+
+.search-box {
+  width: 100%;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: white;
+  padding: 13px;
+  border-radius: 8px;
+  outline: none;
+  margin-bottom: 18px;
+}
+
+.search-box:focus,
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--accent);
+}
+
+/* LISTA DE CÓDIGOS */
+
+.section-title {
+  font-size: 17px;
+  margin-bottom: 15px;
+}
+
+.code-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 15px;
+}
+
+.code-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  padding: 17px;
+  transition: 0.2s;
+}
+
+.code-card:hover {
+  border-color: #49658e;
+  transform: translateY(-2px);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.card-top h3 {
+  font-size: 16px;
+  overflow-wrap: anywhere;
+}
+
+.language {
+  color: #80adff;
+  background: #1b2b45;
+  padding: 5px 8px;
+  border-radius: 5px;
+  font-size: 11px;
+}
+
+.category {
+  color: var(--muted);
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+.description {
+  color: #aeb9c9;
+  font-size: 13px;
+  line-height: 1.5;
+  min-height: 38px;
+  overflow-wrap: anywhere;
+}
+
+.card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 17px;
+}
+
+.small-btn {
+  background: var(--panel2);
+  color: var(--text);
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.small-btn:hover {
+  background: #26364e;
+}
+
+.favorite {
+  color: #ffc857;
+}
+
+/* EDITOR LATERAL */
+
+.editor {
+  width: 390px;
+  background: #101722;
+  border-left: 1px solid var(--border);
+  padding: 22px;
+  flex-shrink: 0;
+  overflow-y: auto;
+  max-height: 100vh;
+  position: sticky;
+  top: 0;
+}
+
+.editor.closed {
+  display: none;
+}
+
+.editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.editor-header h2 {
+  font-size: 19px;
+}
+
+.close-btn {
+  background: var(--panel2);
+  color: white;
+  border-radius: 7px;
+  padding: 8px 11px;
+}
+
+.field {
+  margin-bottom: 16px;
+}
+
+.field label {
+  display: block;
+  color: #aab5c7;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  background: #0b111b;
+  color: white;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 11px;
+  outline: none;
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 85px;
+  line-height: 1.5;
+}
+
+#codeInput {
+  min-height: 190px;
+  font-family: Consolas, monospace;
+  font-size: 13px;
+  tab-size: 2;
+}
+
+.editor-buttons {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.empty {
+  background: var(--panel);
+  border: 1px dashed var(--border);
+  padding: 35px 15px;
+  border-radius: 10px;
+  text-align: center;
+  color: var(--muted);
+  grid-column: 1 / -1;
+}
+
+.page-content {
+  display: none;
+}
+
+.page-content.active {
+  display: block;
+}
+
+.info-box {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  color: #aeb9c9;
+  line-height: 1.7;
+}
+
+.toast {
+  position: fixed;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1d3c32;
+  color: #a8f1d0;
+  border: 1px solid #287b59;
+  padding: 12px 18px;
+  border-radius: 8px;
+  display: none;
+  z-index: 10;
+}
+
+/* RESPONSIVO */
+
+@media (max-width: 1000px) {
+  .app {
+    flex-wrap: wrap;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: 12px;
+  }
+
+  .logo {
+    margin: 5px 8px 12px;
+  }
+
+  .menu-title {
+    display: none;
+  }
+
+  .nav-menu {
+    display: flex;
+    gap: 5px;
+    overflow-x: auto;
+  }
+
+  .nav-btn {
+    width: auto;
+    white-space: nowrap;
+    margin: 0;
+  }
+
+  .main {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .editor {
+    width: 100%;
+    position: fixed;
+    inset: 0;
+    z-index: 5;
+    max-height: 100vh;
+  }
+
+  .editor.closed {
+    display: none;
+  }
+}
+
+@media (max-width: 550px) {
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .topbar h1 {
+    font-size: 21px;
+  }
+
+  .main {
+    padding: 15px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- MENU -->
+  <aside class="sidebar">
+
+    <div class="logo">MEU CADERNO <span>DEV</span></div>
+
+    <div class="menu-title">Workspace</div>
+
+    <nav class="nav-menu">
+      <button class="nav-btn active" data-page="inicio">⌂ Painel</button>
+      <button class="nav-btn" data-page="codigos">⌘ Meus códigos</button>
+      <button class="nav-btn" data-page="categorias">▤ Categorias</button>
+      <button class="nav-btn" data-page="favoritos">★ Favoritos</button>
+      <button class="nav-btn" data-page="configuracoes">⚙ Configurações</button>
+    </nav>
+
+    <div class="menu-title">Criação</div>
+
+    <button class="nav-btn" id="addMenuBtn">＋ Adicionar código</button>
+
+  </aside>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="main">
+
+    <header class="topbar">
+      <div>
+        <h1 id="pageTitle">Painel</h1>
+        <p>Seu espaço de conhecimento em programação.</p>
+      </div>
+
+      <button class="primary-btn" id="openEditorBtn">
+        ＋ Novo código
+      </button>
+    </header>
+
+    <!-- PAINEL -->
+    <section class="page-content active" id="page-inicio">
+
+      <div class="stats">
+        <div class="stat-card">
+          <p>Total de códigos</p>
+          <h2 id="totalCount">0</h2>
+        </div>
+
+        <div class="stat-card">
+          <p>Favoritos</p>
+          <h2 id="favoriteCount">0</h2>
+        </div>
+
+        <div class="stat-card">
+          <p>Categorias</p>
+          <h2 id="categoryCount">0</h2>
+        </div>
+      </div>
+
+      <h2 class="section-title">Adicionados recentemente</h2>
+      <div class="code-list" id="recentList"></div>
+
+    </section>
+
+    <!-- MEUS CÓDIGOS -->
+    <section class="page-content" id="page-codigos">
+
+      <input
+        type="search"
+        class="search-box"
+        id="searchInput"
+        placeholder="Pesquisar código, linguagem ou categoria..."
+      >
+
+      <h2 class="section-title">Biblioteca de códigos</h2>
+      <div class="code-list" id="allList"></div>
+
+    </section>
+
+    <!-- CATEGORIAS -->
+    <section class="page-content" id="page-categorias">
+
+      <h2 class="section-title">Categorias disponíveis</h2>
+      <div class="code-list" id="categoryList"></div>
+
+    </section>
+
+    <!-- FAVORITOS -->
+    <section class="page-content" id="page-favoritos">
+
+      <h2 class="section-title">Seus códigos favoritos</h2>
+      <div class="code-list" id="favoriteList"></div>
+
+    </section>
+
+    <!-- CONFIGURAÇÕES -->
+    <section class="page-content" id="page-configuracoes">
+
+      <h2 class="section-title">Configurações</h2>
+
+      <div class="info-box">
+        <h3>Meu Caderno DEV</h3>
+        <p>
+          Versão inicial do seu ambiente de programação.
+        </p>
+        <p>
+          Seus códigos estão sendo guardados neste navegador.
+        </p>
+        <p>
+          A próxima etapa será conectar o Firebase Firestore
+          para permitir o armazenamento na nuvem.
+        </p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- EDITOR -->
+  <aside class="editor closed" id="editor">
+
+    <div class="editor-header">
+      <h2 id="editorTitle">Novo código</h2>
+      <button class="close-btn" id="closeEditorBtn">✕</button>
+    </div>
+
+    <form id="codeForm">
+
+      <div class="field">
+        <label for="nameInput">Nome do código</label>
+        <input
+          id="nameInput"
+          type="text"
+          placeholder="Ex: Meu primeiro botão"
+          required
+        >
+      </div>
+
+      <div class="field">
+        <label for="languageInput">Linguagem</label>
+        <select id="languageInput">
+          <option>HTML</option>
+          <option>CSS</option>
+          <option>JavaScript</option>
+          <option>Python</option>
+          <option>Java</option>
+          <option>PHP</option>
+          <option>SQL</option>
+          <option>Outra</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="categoryInput">Categoria</label>
+        <input
+          id="categoryInput"
+          type="text"
+          list="categoryOptions"
+          placeholder="Ex: Botões"
+        >
+        <datalist id="categoryOptions">
+          <option value="HTML básico">
+          <option value="CSS">
+          <option value="JavaScript">
+          <option value="Botões">
+          <option value="Projetos">
+          <option value="Outros">
+        </datalist>
+      </div>
+
+      <div class="field">
+        <label for="codeInput">Código</label>
+        <textarea
+          id="codeInput"
+          placeholder="Digite ou cole seu código aqui..."
+          spellcheck="false"
+          required
+        ></textarea>
+      </div>
+
+      <div class="field">
+        <label for="descriptionInput">O que esse código faz?</label>
+        <textarea
+          id="descriptionInput"
+          placeholder="Explique o funcionamento..."
+        ></textarea>
+      </div>
+
+      <div class="field">
+        <label for="notesInput">Anotações</label>
+        <textarea
+          id="notesInput"
+          placeholder="Observações importantes..."
+        ></textarea>
+      </div>
+
+      <div class="editor-buttons">
+        <button class="primary-btn" type="submit" id="saveBtn">
+          Salvar código
+        </button>
+
+        <button class="secondary-btn" type="button" id="clearBtn">
+          Limpar
+        </button>
+      </div>
+
+    </form>
+
+  </aside>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ==================================
+   MEU CADERNO DEV
+   SISTEMA DE ARMAZENAMENTO LOCAL
+================================== */
+
+const STORAGE_KEY = "meuCadernoDEV_codigos";
+
+let codes = carregarCodigos();
+let editingId = null;
+let currentPage = "inicio";
+
+/* ELEMENTOS */
+
+const editor = document.getElementById("editor");
+const codeForm = document.getElementById("codeForm");
+
+const nameInput = document.getElementById("nameInput");
+const languageInput = document.getElementById("languageInput");
+const categoryInput = document.getElementById("categoryInput");
+const codeInput = document.getElementById("codeInput");
+const descriptionInput = document.getElementById("descriptionInput");
+const notesInput = document.getElementById("notesInput");
+
+const pageTitle = document.getElementById("pageTitle");
+const searchInput = document.getElementById("searchInput");
+
+/* CARREGAR DADOS */
+
+function carregarCodigos() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    return Array.isArray(saved) ? saved : [];
+  } catch {
+    return [];
+  }
+}
+
+/* SALVAR DADOS */
+
+function salvarNoNavegador() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(codes));
+}
+
+/* NOTIFICAÇÃO */
+
+function mostrarToast(message) {
+  const toast = document.getElementById("toast");
+
+  toast.textContent = message;
+  toast.style.display = "block";
+
+  setTimeout(() => {
+    toast.style.display = "none";
+  }, 2500);
+}
+
+/* ABRIR E FECHAR EDITOR */
+
+function abrirEditor() {
+  editor.classList.remove("closed");
+}
+
+function fecharEditor() {
+  editor.classList.add("closed");
+}
+
+/* NOVO CÓDIGO */
+
+function novoCodigo() {
+  editingId = null;
+  codeForm.reset();
+
+  document.getElementById("editorTitle").textContent = "Novo código";
+  document.getElementById("saveBtn").textContent = "Salvar código";
+
+  abrirEditor();
+  nameInput.focus();
+}
+
+/* LIMPAR CAMPOS */
+
+function limparCampos() {
+  codeForm.reset();
+  editingId = null;
+
+  document.getElementById("editorTitle").textContent = "Novo código";
+  document.getElementById("saveBtn").textContent = "Salvar código";
+}
+
+/* SALVAR OU ATUALIZAR */
+
+codeForm.addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const name = nameInput.value.trim();
+  const language = languageInput.value;
+  const category = categoryInput.value.trim() || "Outros";
+  const code = codeInput.value;
+  const description = descriptionInput.value.trim();
+  const notes = notesInput.value.trim();
+
+  if (!name || !code.trim()) {
+    mostrarToast("Preencha o nome e o código.");
+    return;
+  }
+
+  if (editingId !== null) {
+    const index = codes.findIndex(item => item.id === editingId);
+
+    if (index !== -1) {
+      codes[index] = {
+        ...codes[index],
+        name,
+        language,
+        category,
+        code,
+        description,
+        notes,
+        updatedAt: Date.now()
+      };
+    }
+
+    mostrarToast("Código atualizado!");
+  } else {
+    const newCode = {
+      id: Date.now().toString() + Math.random().toString(16).slice(2),
+      name,
+      language,
+      category,
+      code,
+      description,
+      notes,
+      favorite: false,
+      createdAt: Date.now()
+    };
+
+    codes.unshift(newCode);
+
+    mostrarToast("Código salvo com sucesso!");
+  }
+
+  salvarNoNavegador();
+  limparCampos();
+  fecharEditor();
+  renderizarTudo();
+  mostrarPagina(currentPage);
+});
+
+/* EDITAR */
+
+function editarCodigo(id) {
+  const item = codes.find(code => code.id === id);
+
+  if (!item) return;
+
+  editingId = id;
+
+  nameInput.value = item.name;
+  languageInput.value = item.language;
+  categoryInput.value = item.category;
+  codeInput.value = item.code;
+  descriptionInput.value = item.description;
+  notesInput.value = item.notes;
+
+  document.getElementById("editorTitle").textContent = "Editar código";
+  document.getElementById("saveBtn").textContent = "Atualizar código";
+
+  abrirEditor();
+}
+
+/* EXCLUIR */
+
+function excluirCodigo(id) {
+  const confirmar = confirm("Deseja realmente excluir este código?");
+
+  if (!confirmar) return;
+
+  codes = codes.filter(item => item.id !== id);
+
+  salvarNoNavegador();
+  renderizarTudo();
+  mostrarPagina(currentPage);
+
+  mostrarToast("Código excluído.");
+}
+
+/* FAVORITAR */
+
+function alternarFavorito(id) {
+  codes = codes.map(item => {
+    if (item.id === id) {
+      return {
+        ...item,
+        favorite: !item.favorite
+      };
+    }
+
+    return item;
+  });
+
+  salvarNoNavegador();
+  renderizarTudo();
+  mostrarPagina(currentPage);
+}
+
+/* CRIAR CARTÃO DE CÓDIGO */
+
+function criarCartao(item) {
+  const card = document.createElement("article");
+  card.className = "code-card";
+
+  const top = document.createElement("div");
+  top.className = "card-top";
+
+  const title = document.createElement("h3");
+  title.textContent = item.name;
+
+  const language = document.createElement("span");
+  language.className = "language";
+  language.textContent = item.language;
+
+  top.append(title, language);
+
+  const category = document.createElement("p");
+  category.className = "category";
+  category.textContent = "Categoria: " + item.category;
+
+  const description = document.createElement("p");
+  description.className = "description";
+  description.textContent = item.description || "Sem descrição.";
+
+  const actions = document.createElement("div");
+  actions.className = "card-actions";
+
+  const editButton = document.createElement("button");
+  editButton.className = "small-btn";
+  editButton.textContent = "Editar";
+  editButton.addEventListener("click", () => editarCodigo(item.id));
+
+  const favoriteButton = document.createElement("button");
+  favoriteButton.className = "small-btn";
+  favoriteButton.textContent = item.favorite ? "★ Favorito" : "☆ Favoritar";
+  if (item.favorite) favoriteButton.classList.add("favorite");
+  favoriteButton.addEventListener("click", () => alternarFavorito(item.id));
+
+  const deleteButton = document.createElement("button");
+  deleteButton.className = "small-btn";
+  deleteButton.textContent = "Excluir";
+  deleteButton.addEventListener("click", () => excluirCodigo(item.id));
+
+  actions.append(editButton, favoriteButton, deleteButton);
+  card.append(top, category, description, actions);
+
+  return card;
+}
+
+/* RENDERIZAR LISTA */
+
+function renderizarLista(containerId, list) {
+  const container = document.getElementById(containerId);
+  container.replaceChildren();
+
+  if (list.length === 0) {
+    const empty = document.createElement("div");
+    empty.className = "empty";
+    empty.textContent = "Nenhum código encontrado.";
+    container.appendChild(empty);
+    return;
+  }
+
+  list.forEach(item => {
+    container.appendChild(criarCartao(item));
+  });
+}
+
+/* RENDERIZAR PAINEL */
+
+function renderizarPainel() {
+  document.getElementById("totalCount").textContent = codes.length;
+
+  document.getElementById("favoriteCount").textContent =
+    codes.filter(item => item.favorite).length;
+
+  document.getElementById("categoryCount").textContent =
+    new Set(codes.map(item => item.category)).size;
+
+  renderizarLista("recentList", codes.slice(0, 6));
+}
+
+/* RENDERIZAR TODOS OS CÓDIGOS */
+
+function renderizarTodos() {
+  const search = searchInput.value.toLowerCase().trim();
+
+  const filtered = codes.filter(item => {
+    const content = [
+      item.name,
+      item.language,
+      item.category,
+      item.code,
+      item.description,
+      item.notes
+    ].join(" ").toLowerCase();
+
+    return content.includes(search);
+  });
+
+  renderizarLista("allList", filtered);
+}
+
+/* RENDERIZAR FAVORITOS */
+
+function renderizarFavoritos() {
+  const favorites = codes.filter(item => item.favorite);
+  renderizarLista("favoriteList", favorites);
+}
+
+/* RENDERIZAR CATEGORIAS */
+
+function renderizarCategorias() {
+  const container = document.getElementById("categoryList");
+  container.replaceChildren();
+
+  const categories = [...new Set(codes.map(item => item.category))];
+
+  if (categories.length === 0) {
+    const empty = document.createElement("div");
+    empty.className = "empty";
+    empty.textContent = "Suas categorias aparecerão aqui.";
+    container.appendChild(empty);
+    return;
+  }
+
+  categories.forEach(category => {
+    const card = document.createElement("div");
+    card.className = "code-card";
+
+    const title = document.createElement("h3");
+    title.textContent = category;
+
+    const count = document.createElement("p");
+    count.className = "description";
+
+    const total = codes.filter(item => item.category === category).length;
+    count.textContent = total + (total === 1 ? " código" : " códigos");
+
+    const button = document.createElement("button");
+    button.className = "small-btn";
+    button.textContent = "Ver códigos";
+
+    button.addEventListener("click", () => {
+      searchInput.value = category;
+      mostrarPagina("codigos");
+      renderizarTodos();
+    });
+
+    card.append(title, count, button);
+    container.appendChild(card);
+  });
+}
+
+/* RENDERIZAR TUDO */
+
+function renderizarTudo() {
+  renderizarPainel();
+  renderizarTodos();
+  renderizarFavoritos();
+  renderizarCategorias();
+}
+
+/* NAVEGAÇÃO */
+
+function mostrarPagina(page) {
+  currentPage = page;
+
+  document.querySelectorAll(".page-content").forEach(section => {
+    section.classList.remove("active");
+  });
+
+  document.getElementById("page-" + page).classList.add("active");
+
+  document.querySelectorAll(".nav-btn[data-page]").forEach(button => {
+    button.classList.toggle("active", button.dataset.page === page);
+  });
+
+  const titles = {
+    inicio: "Painel",
+    codigos: "Meus códigos",
+    categorias: "Categorias",
+    favoritos: "Favoritos",
+    configuracoes: "Configurações"
+  };
+
+  pageTitle.textContent = titles[page] || "Meu Caderno DEV";
+
+  if (page === "codigos") renderizarTodos();
+  if (page === "favoritos") renderizarFavoritos();
+  if (page === "categorias") renderizarCategorias();
+}
+
+/* EVENTOS DOS BOTÕES */
+
+document.querySelectorAll(".nav-btn[data-page]").forEach(button => {
+  button.addEventListener("click", () => {
+    mostrarPagina(button.dataset.page);
+  });
+});
+
+document.getElementById("openEditorBtn").addEventListener("click", novoCodigo);
+
+document.getElementById("addMenuBtn").addEventListener("click", novoCodigo);
+
+document.getElementById("closeEditorBtn").addEventListener("click", fecharEditor);
+
+document.getElementById("clearBtn").addEventListener("click", limparCampos);
+
+searchInput.addEventListener("input", renderizarTodos);
+
+/* INICIALIZAÇÃO */
+
+renderizarTudo();
+mostrarPagina("inicio");
+
+</script>
+
+</body>
+</html>
